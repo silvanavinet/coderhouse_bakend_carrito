@@ -5,7 +5,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 // Ruta JSON
-const filePath = path.join("", './data/products.json');
+const filePath = path.join("", './src/data/products.json');
 
 // Función para leer el archivo
 function readFile() {
@@ -58,6 +58,9 @@ router.post('/', (req, res) => {
     file.push(data);
 
     writeFile(file);
+
+    req.io.emit('newProduct', data);
+    // io.emit('newProduct', data);
     res.send({ message: "Producto agregado", product: data });
 });
 
